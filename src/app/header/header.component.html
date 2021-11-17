@@ -1,0 +1,40 @@
+<header
+  class="card w-12 fluid px-4 pt-3 m-0 text-white text-5xl align-content-center justify-content-center text-center">
+  <p class="m-0 cursor-pointer" [routerLink]="'/'">Магазин клоунських перук</p>
+  <small class="text-2xl m-0 text-pink-600">7 бригада</small>
+  <span class="absolute right-0 top-0 mt-8 mr-8 sm:mr-6">
+    <button *ngIf="isNotLoginPage()" pButton class="p-button-primary" [label]="isLoggedIn()?'Logout':'Login'" [icon]="'pi '
+     + (isLoggedIn()?'pi-minus':'pi-plus')"
+            iconPos="right" (click)="goToLogin()"></button>
+  </span>
+  <p-divider align="center" class="overflow-hidden">
+    <span class="p-tag bg-primary-reverse">
+      clown-shop-clown-shop-clown-shop-clown-shop
+    </span>
+  </p-divider>
+</header>
+<p-toast></p-toast>
+
+<!--<div class="p-d-flex p-3 m-3 p-ai-center">-->
+<!--  <div class="p-col-12">-->
+
+<!--    <p-card>-->
+<!--      <textarea class="p-text" pInputTextarea [value]="message.value"></textarea>-->
+<!--    </p-card>-->
+<!--    <p-button class="p-badge-info">Clown shop</p-button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<form ngForm="form" #form>-->
+<!--  <input type="text" class="p-inputtext" name="message" #message>-->
+<!--  <p-button type="submit" (click)="echo(message.value)"></p-button>-->
+<!--  <p-button type="submit" (click)="post(message.value)"></p-button>-->
+<!--  <input type="text" class="p-inputtext" name="email" #email>-->
+<!--  <input type="text" class="p-inputtext" name="password" #password>-->
+<!--  <p-button type="submit" (click)="auth(email.value, password.value)"> Send</p-button>-->
+
+<!--</form>-->
+
+<!--<h5>Addons</h5>-->
+
+

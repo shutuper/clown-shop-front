@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+<div class="grid flex text-white">
+
+  <div class="bg-primary-reverse col-6 min-h-screen">
+    <h3 class="m-2"><b>{{product.name}}</b></h3>
+    <div class="fluid text-center justify-content-center">
+      <p-image width="300" height="300" [preview]="true" [src]="product.image">-->
+      </p-image>
+    </div>
+    <div class="bg-primary p-2"><b>Price: </b> ${{product.price}}</div>
+    <div class="bg-primary p-2"><b>Quantity: </b> {{product.quantity}}</div>
+    <p-rating class="my-2" [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+    <div class="bg-primary p-2"><b>Description: </b> {{product.description}}</div>
+
+
+  </div>
+  <div class="bg-primary-reverse col-offset-1 text-left justify-content-center col-5 min-h-screen">
+    <form class=" card-container p-3" (ngSubmit)="makeOrder(form)" #form="ngForm">
+
+      <div class="mt-2 field"><label for="quantity">Quantity:</label><br>
+        <input type="number" class="inputfield w-full" min="0" max="{{product.quantity}}" ngModel required name="quantity" #quantity pInputText
+               id="quantity"></div>
+
+      <div class="mt-2 field"><label for="name">Name:</label><br>
+        <input type="text" class="inputfield w-full" required pInputText ngModel name="name" #name id="name"></div>
+
+      <div class="mt-2 field"><label for="surname">Surname:</label><br>
+        <input type="text" class="inputfield w-full" minlength="2" required ngModel name="surname" #surname pInputText id="surname"></div>
+
+      <div class="mt-2 field"><label for="phone">Phone:</label><br>
+        <input type="tel" class="inputfield w-full" pInputText minlength="6" maxlength="15" required ngModel name="phone" #phone id="phone"></div>
+
+      <div class="mt-2 field"><label for="address">Full address:</label><br>
+        <input type="text" class="inputfield w-full" pInputText minlength="20" maxlength="250" required name="address" #address ngModel
+               id="address"></div>
+
+      <button type="submit" [disabled]="form.invalid" pButton class="p-button-primary mt-4">Продовжити</button>
+    </form>
+
+  </div>
+</div>

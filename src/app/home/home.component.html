@@ -1,0 +1,40 @@
+<app-items></app-items>
+
+<p-button routerLink="/admin"> GoGOAdmin</p-button>
+
+<div class="card col-10 mt-0 p-0 mx-auto">
+  <p-accordion class="mt-0 p-0">
+    <p-accordionTab class="text-xl" header="Why we?!">
+      <p>Because our company is one of the best in KPI, our supervisor is Andrey KosoBOSS.
+        This man really knows what he's doing! Drag!Drag!Drag!</p>
+
+      <div class="flex align-items-center justify-content-center">
+        <p-image class="sm:max-w-max mx-auto" src="./assets/img/kosoboss.jpg" width="500px" height="300px" alt="lol"
+                 [preview]="true"></p-image>
+      </div>
+
+    </p-accordionTab>
+
+    <p-accordionTab class="text-xl" header="Our delivery is breathtaking!">
+
+      <div class="card p-6">
+        <p-timeline styleClass="text-xl" [value]="events" layout="horizontal" align="alternate">
+          <ng-template pTemplate="content" let-event>
+            {{event}}
+          </ng-template>
+          <ng-template pTemplate="opposite" let-event>
+          </ng-template>
+        </p-timeline>
+      </div>
+
+    </p-accordionTab>
+
+    <p-accordionTab class="text-xl" header="We are popular!">
+      <p>You know, even <span class="text-pink-500 text-2xl">VOLODYA</span>
+        knows us and he always visits our *store*!!!</p>
+    </p-accordionTab>
+
+  </p-accordion>
+</div>
+
+

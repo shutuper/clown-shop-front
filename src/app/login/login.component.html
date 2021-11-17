@@ -1,0 +1,46 @@
+<p-toast></p-toast>
+<div class="card grid p-2 mt-2 fluid h-full justify-content-center align-content-center align-items-center">
+
+  <form #form="ngForm" class="flex-column flex">
+
+    <label class="text-xl" for="em">Enter email:</label>
+    <input type="email" id="em" ngModel pInputText email required #email="ngModel" name="email"
+           placeholder="test@gmail.com"
+           [ngClass]="(form.touched && form.invalid)? 'ng-invalid ng-dirty mt-2':'mt-2'">
+    <small class="text-pink-800 text-sm mt-2" *ngIf="email.touched && email.invalid">Enter valid email!</small>
+
+    <br>
+
+    <label for="pass" class="text-xl">Enter password:</label>
+    <input type="password" id="pass" minlength="8" ngModel pPassword required #password="ngModel" name="password"
+           placeholder="Password"
+           [ngClass]="(form.touched && form.invalid)? 'ng-invalid ng-dirty mt-2':'mt-2'">
+
+    <small class="text-pink-800 text-sm mt-2" *ngIf=" password.touched && password.invalid">Password length should be
+      >=8!</small>
+
+    <span class="p-buttonset w-12 card p-2">
+        <input type="submit" (click)="login(form)" class="p-button-primary text-0 justify-content-center p-button mt-4"
+               pButton
+               [disabled]="!form.valid"
+               value="Login">
+
+        <input type="submit" class="p-button-primary text-0 justify-content-center p-button mt-4" pButton
+               [disabled]="!form.valid" (click)="registrate(form)" value="Registrate">
+    </span>
+  </form>
+
+  <!--  <input type="submit" class="p-button-primary text-0 justify-content-center p-button mt-4" pButton-->
+  <!--         (click)="sayEcho('dsfsdfsdf')" value="echo">-->
+  <!--  <input type="submit" class="p-button-primary text-0 justify-content-center p-button mt-4" pButton-->
+  <!--         (click)="logout()" value="logout">-->
+
+</div>
+<div class="card fluid mt-0  text-center">
+  <p-divider align="center" class="overflow-hidden">
+    <span class="p-tag bg-primary-reverse">
+      clown-shop-clown-shop-clown-shop
+    </span>
+  </p-divider>
+  <button pButton [routerLink]="'/'" class="p-button-primary mx-auto mt-4">Go back?!</button>
+</div>

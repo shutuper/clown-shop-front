@@ -1,0 +1,84 @@
+<div class="card bg-auto fluid px-4 pt-4 justify-content-center align-content-center text-white">
+
+  <div class="card">
+    <p-dataView #dv [value]="getProducts()" [paginator]="true" [rows]="9" [loading]="loading"
+                layout="grid">
+
+      <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between">
+          <h3 class="text-4xl">Storage, clown storage</h3>
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </ng-template>
+
+      <ng-template let-product pTemplate="listItem">
+        <div class="col-12 md:p-4">
+
+          <div class="product-list-item">
+
+            <p-image [src]="product.image"
+                     [alt]="product.name"></p-image>
+
+            <div class="product-list-detail">
+
+              <div class="product-name">{{product.name}}</div>
+              <div class="product-description">{{product.description}}</div>
+              <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+              <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
+
+            </div>
+
+            <div class="product-list-action">
+              <span class="product-price">${{product.price}}</span>
+              <p-button icon="pi pi-shopping-cart" label="Add to Cart"
+                        [routerLink]="['/orders', product.id]"
+                        [disabled]="isBuyingDisabled(product.inventoryStatus)"></p-button>
+              <span
+                [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template let-product pTemplate="gridItem">
+        <div class="md:col-4 sm:col-12 xl:col:4">
+
+          <div class="product-grid-item card">
+
+            <div class="product-grid-item-top">
+              <div>
+                <i class="pi pi-tag product-category-icon"></i>
+                <span class="product-category">{{product.category}}</span>
+              </div>
+              <span
+                [class]="'product-badge status-' + (product.inventoryStatus.toLowerCase())">{{product.inventoryStatus}}</span>
+            </div>
+
+            <div class="product-grid-item-content">
+
+              <p-image
+                [src]="product.image"
+                [alt]="product.name"></p-image>
+
+              <div class="product-name ">{{product.name}}</div>
+              <div class="product-description">{{product.description}}</div>
+              <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+
+            </div>
+
+            <div class="product-grid-item-bottom">
+              <span class="product-price">${{product.price}}</span>
+              <p-button icon="pi pi-shopping-cart" [routerLink]="['/orders', product.id]"
+                        [disabled]="isBuyingDisabled(product.inventoryStatus)"></p-button>
+            </div>
+
+          </div>
+
+        </div>
+      </ng-template>
+
+    </p-dataView>
+  </div>
+
+</div>

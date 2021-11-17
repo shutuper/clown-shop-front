@@ -1,0 +1,27 @@
+<div class="card mt-2 py-2 px-8 sm:px-2 text-left align-content-center justify-content-center">
+  <form class=" card-container p-3"  #form="ngForm">
+
+    <div class="mt-2 field"><label for="quantity">Quantity:</label><br>
+      <input type="number" class="inputfield w-full" min="0"  ngModel required name="quantity"
+             #quantity pInputText
+             id="quantity"></div>
+
+    <div class="mt-2 field"><label for="name">Name:</label><br>
+      <input type="text" class="inputfield w-full" required pInputText ngModel name="name" #name id="name"></div>
+
+    <div class="mt-2 field"><label for="surname">Surname:</label><br>
+      <input type="text" class="inputfield w-full" minlength="2" required ngModel name="surname" #surname pInputText
+             id="surname"></div>
+
+    <div class="mt-2 field"><label for="phone">Phone:</label><br>
+      <input type="tel" class="inputfield w-full" pInputText minlength="6" maxlength="15" required ngModel name="phone"
+             #phone id="phone"></div>
+
+    <div class="mt-2 field"><label for="address">Full address:</label><br>
+      <input type="text" class="inputfield w-full" pInputText minlength="20" maxlength="250" required name="address"
+             #address ngModel
+             id="address"></div>
+
+    <button type="submit" [disabled]="form.invalid" pButton class="p-button-primary mt-4">Продовжити</button>
+  </form>
+</div>
