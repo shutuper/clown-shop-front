@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from "../../services/product.service";
+import {compareNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 
 export interface Product {
-  id?: string;
+  id: number;
   name?: string;
   description?: string;
   price?: number;
@@ -25,7 +26,9 @@ export class ItemsComponent implements OnInit {
   loading: boolean = true;
 
   getProducts() {
-    return this.products;
+    if (this.products !== undefined)
+      return this.products.sort((a, b) => a.id - b.id);
+    return [];
   }
 
   constructor(private productService: ProductService) {
@@ -34,8 +37,8 @@ export class ItemsComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((productsList: Product[]) => {
       this.products = productsList;
+      this.loading = false;
     });
-    this.loading = false;
   }
 
 

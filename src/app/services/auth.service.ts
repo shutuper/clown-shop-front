@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {map} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 
 export interface Message {
@@ -16,9 +15,9 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
   }
 
-  isLoggedIn = false;
+  isAdminUrl: string = '/api/v1/admin';
 
   isAdmin() {
-    return this.httpClient.get<Message>("/api/v1/products/admin");
+    return this.httpClient.get<Message>(this.isAdminUrl);
   }
 }

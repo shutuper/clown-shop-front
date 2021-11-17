@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Message, SmpMessageService} from "../services/smp-message.service";
+
 import {Router} from "@angular/router";
 import {LoginService} from "../services/login.service";
 import {MessageService} from "primeng/api";
@@ -16,31 +16,26 @@ export class HeaderComponent implements OnInit {
   public static login: boolean = false;
   currentUrl!: string;
 
-  constructor(private mesServ: SmpMessageService,
-              private router: Router,
+  constructor(private router: Router,
               private loginService: LoginService,
               private messageService: MessageService) {
   }
 
   ngOnInit(): void {
     console.log(this.router.url);
-    this.loginService.isLoggedIn().subscribe(() => {
-      this.setIsLoggedInTrue();
-      return;
-    });
-    this.setIsLoggedInFalse();
+    this.firstLogin();
   }
 
 
   goToLogin() {
-
-    if (!this.isLoggedIn()) {
+    if (!HeaderComponent.login) {
       this.router.navigateByUrl("login");
     } else {
       this.loginService.logOut().subscribe(
         () => {
           HeaderComponent.login = false;
           this.messageService.add({severity: 'info', summary: 'Success', detail: 'You logged out!'});
+          localStorage.removeItem('url');
           this.router.navigateByUrl('/');
         },
         () => {
@@ -58,32 +53,21 @@ export class HeaderComponent implements OnInit {
     return HeaderComponent.login;
   }
 
+  firstLogin() {
+    return this.loginService.isLoggedIn().subscribe(() => {
+      return this.setIsLoggedInTrue();
+    }, () => {
+      return this.setIsLoggedInFalse();
+    });
+  }
+
   setIsLoggedInTrue() {
-    HeaderComponent.login = true;
+    return (HeaderComponent.login = true);
   }
 
   setIsLoggedInFalse() {
-    HeaderComponent.login = false;
+    return (HeaderComponent.login = false);
   }
 
-  echo(value: string) {
-    this.mesServ.getMessage(value).subscribe((mes: Message) => {
-      this.message = mes.message;
-      console.log(mes);
-    })
-  }
-
-  post(value: string) {
-    this.mesServ.postMessage(value).subscribe((x: Message) => {
-      this.message = x.message;
-      console.log(this.message);
-    });
-  }
-
-  auth(email: string, password: string) {
-    this.mesServ.auth(email, password).subscribe((x) => {
-      console.log(x.status);
-    });
-  }
 
 }

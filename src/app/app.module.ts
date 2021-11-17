@@ -8,7 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeaderComponent} from './header/header.component';
 import {MessageService, SharedModule} from "primeng/api";
 import {CardModule} from "primeng/card";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DataViewModule} from "primeng/dataview";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputTextModule} from "primeng/inputtext";
@@ -28,9 +28,16 @@ import {PasswordModule} from "primeng/password";
 import {DividerModule} from "primeng/divider";
 import {OrderComponent} from './home/order/order.component';
 import {ToastModule} from "primeng/toast";
-import { AdminComponent } from './home/admin/admin.component';
+import {AdminComponent} from './home/admin/admin.component';
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./services/auth-guard.service";
+import {TableModule} from "primeng/table";
+import {DropdownModule} from "primeng/dropdown";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {ClipboardModule} from "@angular/cdk/clipboard";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -63,9 +70,16 @@ import {AuthGuard} from "./services/auth-guard.service";
     RatingModule,
     PasswordModule,
     DividerModule,
-    ToastModule
+    ToastModule,
+    TableModule,
+    DropdownModule,
+    ReactiveFormsModule,
+    SelectButtonModule,
+    ClipboardModule,
+    InputSwitchModule,
+    DragDropModule
   ],
-  providers: [MessageService, AuthService, AuthGuard],
+  providers: [MessageService, AuthService, AuthGuard, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

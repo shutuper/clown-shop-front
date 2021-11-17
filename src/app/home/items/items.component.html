@@ -16,12 +16,12 @@
 
           <div class="product-list-item">
 
-            <p-image [src]="product.image"
+            <p-image class="border-500" [src]="product.image"
                      [alt]="product.name"></p-image>
 
             <div class="product-list-detail">
 
-              <div class="product-name">{{product.name}}</div>
+              <div class="product-name border-500">{{product.name}}</div>
               <div class="product-description">{{product.description}}</div>
               <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
               <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
@@ -58,11 +58,11 @@
             <div class="product-grid-item-content">
 
               <p-image
-                [src]="product.image"
+                [src]="product.image" height="200px"
                 [alt]="product.name"></p-image>
 
               <div class="product-name ">{{product.name}}</div>
-              <div class="product-description">{{product.description}}</div>
+              <div class="product-description">{{product.description.substr(0, 30)+'...'}}</div>
               <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
 
             </div>

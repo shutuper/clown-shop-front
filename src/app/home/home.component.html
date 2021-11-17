@@ -1,6 +1,5 @@
 <app-items></app-items>
 
-<p-button routerLink="/admin"> GoGOAdmin</p-button>
 
 <div class="card col-10 mt-0 p-0 mx-auto">
   <p-accordion class="mt-0 p-0">
@@ -35,6 +34,21 @@
     </p-accordionTab>
 
   </p-accordion>
+
+
+  <div class="card mt-4 w-100 justify-content-center fluid align-content-center">
+    <div>
+      <p class="my-2">{{lang}}</p>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink78">
+        <a (click)="changeLang('en')" class="dropdown-item mx-1 mt-2"><span class="flag-icon flag-icon-us"></span> English</a>
+        <a (click)="changeLang('fr')" class="dropdown-item mx-1 mt-2"><span class="flag-icon flag-icon-fr"></span> Français</a>
+        <a (click)="changeLang('de')" class="dropdown-item mx-1 mt-2"><span class="flag-icon flag-icon-de"></span> Deutsch</a>
+        <a (click)="changeLang('ru')" class="dropdown-item mx-1 mt-2"><span class="flag-icon flag-icon-ru"></span> Russian</a>
+        <a (click)="changeLang('ua')" class="dropdown-item mx-1 mt-2"><span class="flag-icon flag-icon-ua"></span> Ukraine</a>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 

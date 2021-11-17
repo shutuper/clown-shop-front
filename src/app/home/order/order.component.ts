@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HeaderComponent} from "../../header/header.component";
 import {MessageService} from "primeng/api";
 import {NgForm} from "@angular/forms";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-order',
@@ -17,10 +18,12 @@ import {NgForm} from "@angular/forms";
 })
 export class OrderComponent implements OnInit {
 
+  productId: number = -1;
   product: Product = {
+    id: this.productId,
     image: 'https://www.svgrepo.com/show/86025/delivery-package.svg'
   };
-  productId: number = -1;
+
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -30,23 +33,23 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     if (!HeaderComponent.login) {
       localStorage.setItem('url', this.router.url);
       this.router.navigateByUrl('/login');
       return;
     }
+
     this.productId = +this.route.snapshot.params['id'];
     console.log(this.productId);
     this.productService.getProductById(this.productId).subscribe((product: Product) => {
-        this.product = product;
-      },
-      () => {
-        this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'Product is not found!'});
-        setTimeout(() => this.router.navigateByUrl('/'), 3000);
-      })
-  }
+      this.product = product;
+      return;
+    }, () => {
+      this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'Product is not found!'});
+      setTimeout(() => this.router.navigateByUrl('/'), 3000);
+    });
 
-  public sassa() {
 
   }
 

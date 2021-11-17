@@ -4,7 +4,7 @@
   <form #form="ngForm" class="flex-column flex">
 
     <label class="text-xl" for="em">Enter email:</label>
-    <input type="email" id="em" ngModel pInputText email required #email="ngModel" name="email"
+    <input type="email" id="em" [ngModel]="loginInpt" pInputText email required #email="ngModel" name="email"
            placeholder="test@gmail.com"
            [ngClass]="(form.touched && form.invalid)? 'ng-invalid ng-dirty mt-2':'mt-2'">
     <small class="text-pink-800 text-sm mt-2" *ngIf="email.touched && email.invalid">Enter valid email!</small>
@@ -12,7 +12,9 @@
     <br>
 
     <label for="pass" class="text-xl">Enter password:</label>
-    <input type="password" id="pass" minlength="8" ngModel pPassword required #password="ngModel" name="password"
+    <input type="password" id="pass" minlength="8" [ngModel]="passwordInpt" pPassword required
+           #password="ngModel"
+           name="password"
            placeholder="Password"
            [ngClass]="(form.touched && form.invalid)? 'ng-invalid ng-dirty mt-2':'mt-2'">
 
@@ -27,6 +29,15 @@
 
         <input type="submit" class="p-button-primary text-0 justify-content-center p-button mt-4" pButton
                [disabled]="!form.valid" (click)="registrate(form)" value="Registrate">
+
+         <div class="block mt-4 text-xl align-content-center">
+        <label for="remember">Remember me: </label>
+           <span>
+          <p-inputSwitch id="remember"
+                         (onChange)="changeRemember(rememb)"
+                         name="remember"
+                         #rememb
+                         [(ngModel)]="remember"></p-inputSwitch></span></div>
     </span>
   </form>
 

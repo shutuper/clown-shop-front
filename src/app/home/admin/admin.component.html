@@ -1,27 +1,104 @@
-<div class="card mt-2 py-2 px-8 sm:px-2 text-left align-content-center justify-content-center">
-  <form class=" card-container p-3"  #form="ngForm">
+<div class="card mt-2 py-2 sm:px-2 text-left align-content-center justify-content-center">
 
-    <div class="mt-2 field"><label for="quantity">Quantity:</label><br>
-      <input type="number" class="inputfield w-full" min="0"  ngModel required name="quantity"
-             #quantity pInputText
-             id="quantity"></div>
+  <div class="grid bg-primary-reverse">
+    <div class="col-6 border-left-3 border-primary">
+      <h3 class="mt-2 text-center p-1 bg-primary"><b>Add new product: </b></h3>
+      <form class=" card-container p-3" (ngSubmit)="saveProduct(form)" #form="ngForm">
 
-    <div class="mt-2 field"><label for="name">Name:</label><br>
-      <input type="text" class="inputfield w-full" required pInputText ngModel name="name" #name id="name"></div>
+        <div class="field"><label for="name">Name:</label><br>
+          <input type="text" class="inputfield w-full" ngModel required pInputText name="name" #name id="name">
+        </div>
 
-    <div class="mt-2 field"><label for="surname">Surname:</label><br>
-      <input type="text" class="inputfield w-full" minlength="2" required ngModel name="surname" #surname pInputText
-             id="surname"></div>
+        <div class="mt-2 field"><label for="quantity">Quantity:</label><br>
+          <input type="number" class="inputfield w-full" min="0" ngModel required
+                 name="quantity"
+                 #quantity pInputText
+                 id="quantity"></div>
 
-    <div class="mt-2 field"><label for="phone">Phone:</label><br>
-      <input type="tel" class="inputfield w-full" pInputText minlength="6" maxlength="15" required ngModel name="phone"
-             #phone id="phone"></div>
+        <div class="mt-2 field"><label for="category">Category:</label><br>
+          <input type="text" class="inputfield w-full" minlength="2" required ngModel name="category" #category
+                 pInputText
+                 id="category"></div>
 
-    <div class="mt-2 field"><label for="address">Full address:</label><br>
-      <input type="text" class="inputfield w-full" pInputText minlength="20" maxlength="250" required name="address"
-             #address ngModel
-             id="address"></div>
+        <div class="mt-2 field"><label for="price">Price: $</label><br>
+          <input type="number" class="inputfield w-full" pInputText min="0" max="1000000" required name="price"
+                 #price ngModel
+                 id="price"></div>
 
-    <button type="submit" [disabled]="form.invalid" pButton class="p-button-primary mt-4">Продовжити</button>
-  </form>
+        <div class="mt-2 field"><label for="image">Image: (link)</label><br>
+          <input type="url" class="inputfield w-full" pInputText required name="image"
+                 #image ngModel
+                 id="image"></div>
+
+        <div class="mt-2 field"><label for="description">Description: </label><br>
+          <input type="text" class="inputfield w-full" pInputTextarea min="0" max="250" required name="description"
+                 #description ngModel
+                 id="description"></div>
+
+        <div class="mt-2 field"><label for="inventoryStatus">Inventory status:</label><br>
+          <p-dropdown [options]="inventoryStatuses" id="inventoryStatus"
+                      ngModel [required]="true" optionValue="value"
+                      placeholder="Select status" optionLabel="name" #inventoryStatus name="inventoryStatus"
+                      [showClear]="true"></p-dropdown>
+        </div>
+
+        <div class="mt-2 field"><label for="wantChange">Change existed product? :</label>
+          <p-selectButton class="mt-2" id="wantChange" [options]="stateOptions" #change ngModel name="wantChange"
+                          optionLabel="label"
+                          optionValue="value"></p-selectButton>
+        </div>
+
+        <div *ngIf="change.value" class="mt-3 field"><label for="id">Product id: </label><br>
+          <input type="number" class="inputfield w-full" min="0" pInputText name="id"
+                 #id ngModel
+                 id="id"></div>
+
+        <button type="submit" [disabled]="form.invalid" pButton class="p-button-primary mt-4">Continue</button>
+      </form>
+    </div>
+    <div class="col-6 border-left-3 border-primary">
+      <h3 class="mt-2 text-center p-1 bg-primary"><b>All products: </b></h3>
+      <p-table [value]="products" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Quantity</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td><a [cdkCopyToClipboard]="product.description" class="no-underline hover:bg-pink-900">{{product.id}}</a>
+            </td>
+            <td>{{product.name}}</td>
+            <td>
+              <p-image [cdkCopyToClipboard]="product.image" class="p-shadow-4"
+                       [src]="product.image"
+                       [alt]="product.name" width="50">
+              </p-image>
+            </td>
+            <td>{{product.category}}</td>
+            <td>${{product.price}}</td>
+            <td>{{product.inventoryStatus}}</td>
+            <td>{{product.quantity}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="mt-4 card field p-3">
+        <form #formDelete="ngForm" (ngSubmit)="deleteProduct(formDelete)">
+
+          <label for="deleteId">Delete product by id: </label><br>
+          <input type="number" class="inputfield w-full mt-2" min="0" required pInputText name="deleteId"
+                 #deleteId ngModel
+                 id="deleteId">
+          <button type="submit" [disabled]="formDelete.invalid" pButton class="p-button-primary mt-4 mx-1">Continue
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

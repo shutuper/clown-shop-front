@@ -17,19 +17,32 @@ export interface Order {
 })
 export class ProductService {
 
+  allProductUrl: string = "/api/v1/products";
+  saveProductUrl: string = "/api/v1/admin/products";
+  makeOrderUrl: string = "/api/v1/orders";
+  deleteProductURl: string = "/api/v1/admin/products/";
+
   constructor(private httpClient: HttpClient) {
   }
 
+  save(product: Product) {
+    return this.httpClient.post<Product>(this.saveProductUrl, product);
+  }
+
+  delete(id: number) {
+    return this.httpClient.delete(`${(this.deleteProductURl)}${id}`);
+  }
+
   getAllProducts() {
-    return this.httpClient.get<Product[]>('/api/v1/products');
+    return this.httpClient.get<Product[]>(this.allProductUrl);
   }
 
   getProductById(id: number) {
-    return this.httpClient.get<Product>(`/api/v1/products/${id}`);
+    return this.httpClient.get<Product>(`${this.allProductUrl}/${id}`);
   }
 
   makeOrder(order: Order) {
-    return this.httpClient.post<Order>('/api/v1/orders', order);
+    return this.httpClient.post<Order>(this.makeOrderUrl, order);
   }
 
 }
